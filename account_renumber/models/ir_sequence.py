@@ -19,8 +19,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-"""
-Account renumber wizard
-"""
 
-from . import models, wizard
+
+from openerp import models, api
+
+
+class IrSequence(models.Model):
+    _inherit = 'ir.sequence'
+
+    @api.multi
+    def get_sequence_id_for_fiscalyear_id(self, fiscalyear_id):
+        """
+        Based on ir_sequence.get_id from the account module.
+        Allows us to get the real sequence for the given fiscal year.
+        :param fiscalyear_id: the fiscal year used to find the correct sequence
+        :return: the sequence related to the fiscalyear, self otherwise.
+        """
+        self.ensure_one()
+
+        for line in self.fiscal_ids:
+            if line.fiscalyear_id.id == fiscalyear_id:
+                return line.sequence_id
+
+        # if no subsequence are defined, return the main one.
+        return self

@@ -2,8 +2,6 @@
 ##############################################################################
 #
 #    OpenERP - Account renumber wizard
-#    Copyright (C) 2009 Pexego Sistemas Informáticos. All Rights Reserved
-#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,8 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-"""
-Account renumber wizard
-"""
 
-from . import models, wizard
+import ir_sequence
+import account_invoice
+import account_move

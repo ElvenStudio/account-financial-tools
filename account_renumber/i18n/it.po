@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_renumber
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
@@ -18,25 +18,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
+"POT-Creation-Date: 2018-03-02 10:42+0000\n"
+"PO-Revision-Date: 2018-03-02 10:42+0000\n"
+"Last-Translator: Elven Studio <elvenstudio.it>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_renumber
+#: model:ir.model,name:account_renumber.model_account_move
+msgid "Account Entry"
+msgstr "Registrazione Contabile"
 
 #. module: account_renumber
 #: model:ir.model,name:account_renumber.model_wizard_renumber
 msgid "Account renumber wizard"
-msgstr ""
+msgstr "Account renumber wizard"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Cancel"
 msgstr "Annulla"
+
+#. module: account_renumber
+#: code:addons/account_renumber/models/account_invoice.py:46
+#, python-format
+msgid "Cannot renumber invoice %s, because the new number is the same of the invoice %s. Extend periods to renumber correctly all invoices."
+msgstr "Non puoi rinumerare la fattura %s, perchè il nuovo numero è lo stesso della fattura %s. Estendi i periodi per rinumeare correttamente tutte le fatture."
 
 #. module: account_renumber
 #: field:wizard.renumber,create_uid:0
@@ -54,14 +64,16 @@ msgid "Display Name"
 msgstr "Nome da visualizzare"
 
 #. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:48
 #: field:wizard.renumber,number_next:0
+#, python-format
 msgid "First Number"
-msgstr ""
+msgstr "Numero di partenza"
 
 #. module: account_renumber
 #: help:wizard.renumber,period_ids:0
 msgid "Fiscal periods to renumber"
-msgstr ""
+msgstr "Periodi fiscali da rinumerare"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
@@ -79,25 +91,32 @@ msgid "Initial"
 msgstr ""
 
 #. module: account_renumber
+#: model:ir.model,name:account_renumber.model_account_invoice
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:49
 #: help:wizard.renumber,number_next:0
+#, python-format
 msgid "Journal sequences will start counting on this number"
-msgstr ""
+msgstr "Le sequenze dei sezionali inizieranno a rinumerare a partire da questo numero"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 #: field:wizard.renumber,journal_ids:0
 msgid "Journals"
-msgstr ""
+msgstr "Sezionali"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Journals and periods to consider"
-msgstr ""
+msgstr "Sezionali e periodi da considerare"
 
 #. module: account_renumber
 #: help:wizard.renumber,journal_ids:0
 msgid "Journals to renumber"
-msgstr ""
+msgstr "Sezionali da rinumerare"
 
 #. module: account_renumber
 #: field:wizard.renumber,__last_update:0
@@ -115,61 +134,80 @@ msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:89
+#: code:addons/account_renumber/wizard/wizard_renumber.py:80
+#: code:addons/account_renumber/wizard/wizard_renumber.py:88
 #, python-format
 msgid "No Data Available"
 msgstr ""
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:90
+#: code:addons/account_renumber/wizard/wizard_renumber.py:88
+#, python-format
+msgid "No account moves found for your selection!"
+msgstr "No account moves found for your selection!"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:80
 #, python-format
 msgid "No records found for your selection!"
-msgstr ""
+msgstr "Nessun record trovato nella tua selezione!"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 #: field:wizard.renumber,period_ids:0
 msgid "Periods"
-msgstr ""
+msgstr "Periodi"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
-msgid ""
-"Posted moves from those journals will be sorted by date and then assigned "
-"sequential numbers using their journal sequence."
-msgstr ""
+msgid "Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence."
+msgstr "Le registrazioni contabili da questi sezionali saranno ordinate per data e quindi rinumerate usando la loro sequenza definita nel sezionale."
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Renumber"
-msgstr ""
+msgstr "Rinumera"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "Renumber Account Moves"
-msgstr ""
+msgstr "Registrazioni contabili rinumerate"
 
 #. module: account_renumber
 #: model:ir.actions.act_window,name:account_renumber.action_account_renumber
 #: model:ir.ui.menu,name:account_renumber.menu_account_renumber
 msgid "Renumber journal entries"
-msgstr ""
+msgstr "Registrazioni sezionale rinumerate"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:138
+#: code:addons/account_renumber/wizard/wizard_renumber.py:101
 #, python-format
 msgid "Renumbered account moves"
-msgstr ""
+msgstr "Renumbered account moves"
 
 #. module: account_renumber
 #: selection:wizard.renumber,state:0
 msgid "Renumbering"
-msgstr ""
+msgstr "Rinumerazione"
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
 msgid "This wizard will help you renumber entries in one or more journals."
-msgstr ""
+msgstr "Questo wizard ti aiuta a rinumerare registrazioni contabili di uno o più sezionali."
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:51
+#: field:wizard.renumber,update_related_invoice_number:0
+#, python-format
+msgid "Update related invoice"
+msgstr "Aggiorna le fatture correlate"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:52
+#: help:wizard.renumber,update_related_invoice_number:0
+#, python-format
+msgid "Update the invoice number when moves refer to an invoice journal."
+msgstr "Aggiorna il numero fattura quando una registrazione fa riferimento a un sezionale di fatturazione."
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form
