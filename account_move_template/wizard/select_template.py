@@ -22,6 +22,8 @@
 from openerp import models, fields, api, exceptions, _
 import time
 
+import logging
+_log =logging.getLogger(__name__)
 
 class WizardSelectMoveTemplate(models.TransientModel):
     _name = "wizard.select.move.template"
@@ -58,8 +60,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
     def load_lines(self):
         self.ensure_one()
         template = self.template_id
+        wizard_partner_id = (self.partner_id and self.partner_id.id) or False
         for line in template.template_line_ids:
             if line.type == 'input':
+                partner_id = (line.partner_id and line.partner_id.id) or wizard_partner_id
                 self.env['wizard.select.move.template.line'].create({
                     'template_id': self.id,
                     'sequence': line.sequence,
@@ -67,6 +71,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     'amount': 0.0,
                     'account_id': line.account_id.id,
                     'move_line_type': line.move_line_type,
+                    'partner_id': partner_id,
                 })
         if not self.line_ids:
             return self.load_template()
@@ -105,6 +110,8 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
         computed_lines = self.template_id.compute_lines(input_lines)
 
+        wizard_partner_id = (self.partner_id and self.partner_id.id) or False
+
         moves = {}
         for line in self.template_id.template_line_ids:
             if line.journal_id.id not in moves:
@@ -112,15 +119,16 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     self.template_id.name,
                     period.id,
                     line.journal_id.id,
-                    self.partner_id.id
+                    wizard_partner_id
                 )
 
+            partner_id = (line.partner_id and line.partner_id.id) or wizard_partner_id
             self._make_move_line(
                 line,
                 computed_lines,
                 moves[line.journal_id.id],
                 period.id,
-                self.partner_id.id
+                partner_id
             )
             if self.template_id.cross_journals:
                 trans_account_id = self.template_id.transitory_acc_id.id
@@ -130,7 +138,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     moves[line.journal_id.id],
                     period.id,
                     trans_account_id,
-                    self.partner_id.id
+                    wizard_partner_id
                 )
 
         return {
@@ -243,3 +251,8 @@ class WizardSelectMoveTemplateLine(models.TransientModel):
         readonly=True
     )
     amount = fields.Float(required=True)
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        readonly=True
+    )

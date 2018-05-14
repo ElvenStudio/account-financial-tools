@@ -32,8 +32,10 @@ Authors:
 * Paolo Chiara <p.chiara@isa.it>
 * Franco Tampieri <franco.tampieri@agilebg.com>
 
+
 Contributors:
 ~~~~~~~~~~~~~
 
 * Alex Comba <alex.comba@agilebg.com> (Port to V8)
 * Guewen Baconnier <guewen.baconnier@camptocamp.com>
+* Domenico Stragapede <d.stragapede@elvenstudio.it>

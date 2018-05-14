@@ -14,13 +14,13 @@
                             <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
                             <field name="state" invisible="1"/>
                         </group>
-                        <newline/>
-                        <group col="3">
-                            <button icon="gtk-cancel" special="cancel" string="Cancel" colspan="1"/>
-                            <button icon="gtk-ok" name="load_template" string="Load" type="object" colspan="1" attrs="{'invisible':[('state','!=','template_selected')]}" />
-                            <button name="load_lines" string="Next" icon="terp-gtk-go-back-rtl" type="object" colspan="1" attrs="{'invisible':[('state','=','template_selected')]}" />
-                        </group>
                     </group>
+                    <footer>
+                        <button name="load_lines" string="Next" type="object" class="oe_highlight" attrs="{'invisible':[('state','=','template_selected')]}" />
+                        <button name="load_template" string="Load" type="object" class="oe_highlight" attrs="{'invisible':[('state','!=','template_selected')]}" />
+                        or
+                        <button class="oe_link" special="cancel" string="Cancel" />
+                    </footer>
                 </form>
             </field>
         </record>
@@ -33,6 +33,7 @@
                     <group col="2">
                         <field name="sequence" invisible="1"/>
                         <field name="name" />
+                        <field name="partner_id" />
                         <field name="account_id" />
                         <field name="move_line_type" />
                         <field name="amount" />
@@ -45,9 +46,10 @@
             <field name="name">Select Move Template Line</field>
             <field name="model">wizard.select.move.template.line</field>
             <field name="arch" type="xml">
-                <tree string="Move Template Line" editable="bottom">
+                <tree string="Move Template Line" editable="bottom" create="false">
                     <field name="sequence" invisible="1"/>
                     <field name="name" />
+                    <field name="partner_id" />
                     <field name="account_id" />
                     <field name="move_line_type" />
                     <field name="amount" />

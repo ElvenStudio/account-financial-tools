@@ -46,7 +46,11 @@ class AccountMoveTemplate(models.Model):
         inverse_name='template_id',
         string='Template Lines'
     )
+
     cross_journals = fields.Boolean(string='Cross-Journals')
+
+    cross_partners = fields.Boolean(string='Cross-Partners')
+
     transitory_acc_id = fields.Many2one(
         comodel_name='account.account',
         string='Transitory account',
@@ -86,6 +90,17 @@ class AccountMoveTemplateLine(models.Model):
     account_tax_id = fields.Many2one(
         comodel_name='account.tax',
         string='Tax'
+    )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Partner',
+        required=False,
+        ondelete="cascade"
+    )
+
+    cross_partner = fields.Boolean(
+        string='Cross-Partner',
+        related='template_id.cross_partners'
     )
 
     _sql_constraints = [

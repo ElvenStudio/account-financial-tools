@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 14:44+0000\n"
-"PO-Revision-Date: 2014-12-18 14:44+0000\n"
+"POT-Creation-Date: 2018-05-14 14:40+0000\n"
+"PO-Revision-Date: 2018-05-14 14:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid "Analytic Account"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:96
+#: code:addons/account_move_template/wizard/select_template.py:101
 #, python-format
 msgid "At least one amount has to be non-zero!"
 msgstr ""
@@ -57,6 +57,11 @@ msgstr ""
 #: selection:account.document.template.line,type:0
 #: selection:account.move.template.line,type:0
 msgid "Computed"
+msgstr ""
+
+#. module: account_move_template
+#: view:account.move.template:account_move_template.view_move_template_form
+msgid "Create Move"
 msgstr ""
 
 #. module: account_move_template
@@ -97,9 +102,29 @@ msgid "Cross-Journals"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.move.template.line,cross_partner:0
+msgid "Cross-Partner"
+msgstr ""
+
+#. module: account_move_template
+#: field:account.move.template,cross_partners:0
+msgid "Cross-Partners"
+msgstr ""
+
+#. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
+msgstr ""
+
+#. module: account_move_template
+#: field:account.document.template,display_name:0
+#: field:account.document.template.line,display_name:0
+#: field:account.move.template,display_name:0
+#: field:account.move.template.line,display_name:0
+#: field:wizard.select.move.template,display_name:0
+#: field:wizard.select.move.template.line,display_name:0
+msgid "Display Name"
 msgstr ""
 
 #. module: account_move_template
@@ -134,6 +159,16 @@ msgstr ""
 #: view:account.move.template.line:account_move_template.view_move_template_line_form
 #: view:account.move.template.line:account_move_template.view_move_template_line_tree
 msgid "Journal Entry Template Line"
+msgstr ""
+
+#. module: account_move_template
+#: field:account.document.template,__last_update:0
+#: field:account.document.template.line,__last_update:0
+#: field:account.move.template,__last_update:0
+#: field:account.move.template.line,__last_update:0
+#: field:wizard.select.move.template,__last_update:0
+#: field:wizard.select.move.template.line,__last_update:0
+msgid "Last Modified on"
 msgstr ""
 
 #. module: account_move_template
@@ -211,7 +246,7 @@ msgid "Next"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:199
+#: code:addons/account_move_template/wizard/select_template.py:207
 #, python-format
 msgid "No Analytic Journal !"
 msgstr ""
@@ -222,7 +257,9 @@ msgid "Number"
 msgstr ""
 
 #. module: account_move_template
+#: field:account.move.template.line,partner_id:0
 #: field:wizard.select.move.template,partner_id:0
+#: field:wizard.select.move.template.line,partner_id:0
 msgid "Partner"
 msgstr ""
 
@@ -288,7 +325,7 @@ msgid "Type"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:104
+#: code:addons/account_move_template/wizard/select_template.py:109
 #, python-format
 msgid "Unable to find a valid period !"
 msgstr ""
@@ -305,9 +342,14 @@ msgid "You can refer to other lines using their sequence number (e.g. 'L(1)' for
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:164
-#: code:addons/account_move_template/wizard/select_template.py:200
+#: code:addons/account_move_template/wizard/select_template.py:172
+#: code:addons/account_move_template/wizard/select_template.py:208
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
+msgstr ""
+
+#. module: account_move_template
+#: view:wizard.select.move.template:account_move_template.wizard_select_template
+msgid "or"
 msgstr ""
 

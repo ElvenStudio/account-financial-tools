@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_move_template
-# 
+#	* account_move_template
+#
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
@@ -15,12 +15,13 @@
 # SaFi J. <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 # Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
+# Domenico Stragapede <d.stragapede@elvenstudio.it>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-14 00:45+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"PO-Revision-Date: 2018-05-14 14:40+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-financial-tools-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +47,7 @@ msgid "Analytic Account"
 msgstr "Conto analitico"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:96
+#: code:addons/account_move_template/wizard/select_template.py:101
 #, python-format
 msgid "At least one amount has to be non-zero!"
 msgstr "Almeno un importo deve essere diverso da zero!"
@@ -72,6 +73,11 @@ msgstr "Azienda"
 #: selection:account.move.template.line,type:0
 msgid "Computed"
 msgstr "Calcolato"
+
+#. module: account_move_template
+#: view:account.move.template:account_move_template.view_move_template_form
+msgid "Create Move"
+msgstr "Crea Registrazione"
 
 #. module: account_move_template
 #: model:ir.actions.act_window,name:account_move_template.action_wizard_select_template_by_move
@@ -111,6 +117,16 @@ msgid "Cross-Journals"
 msgstr "Multi-sezionale"
 
 #. module: account_move_template
+#: field:account.move.template.line,cross_partner:0
+msgid "Cross-Partner"
+msgstr "Multi-Partner"
+
+#. module: account_move_template
+#: field:account.move.template,cross_partners:0
+msgid "Cross-Partners"
+msgstr "Multi-Partner"
+
+#. module: account_move_template
 #: selection:account.move.template.line,move_line_type:0
 #: selection:wizard.select.move.template.line,move_line_type:0
 msgid "Debit"
@@ -128,7 +144,8 @@ msgstr "Nome da visualizzare"
 
 #. module: account_move_template
 #: field:account.document.template,id:0
-#: field:account.document.template.line,id:0 field:account.move.template,id:0
+#: field:account.document.template.line,id:0
+#: field:account.move.template,id:0
 #: field:account.move.template.line,id:0
 #: field:wizard.select.move.template,id:0
 #: field:wizard.select.move.template.line,id:0
@@ -232,7 +249,8 @@ msgstr "Template di registrazioni"
 #. module: account_move_template
 #: field:account.document.template,name:0
 #: field:account.document.template.line,name:0
-#: field:account.move.template,name:0 field:account.move.template.line,name:0
+#: field:account.move.template,name:0
+#: field:account.move.template.line,name:0
 #: field:wizard.select.move.template.line,name:0
 msgid "Name"
 msgstr "Nome"
@@ -243,7 +261,7 @@ msgid "Next"
 msgstr "Avanti"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:199
+#: code:addons/account_move_template/wizard/select_template.py:207
 #, python-format
 msgid "No Analytic Journal !"
 msgstr "Nessun giornale analitico!"
@@ -254,7 +272,9 @@ msgid "Number"
 msgstr "Numero"
 
 #. module: account_move_template
+#: field:account.move.template.line,partner_id:0
 #: field:wizard.select.move.template,partner_id:0
+#: field:wizard.select.move.template.line,partner_id:0
 msgid "Partner"
 msgstr "Partner"
 
@@ -320,7 +340,7 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:104
+#: code:addons/account_move_template/wizard/select_template.py:109
 #, python-format
 msgid "Unable to find a valid period !"
 msgstr "Impossibile trovare un periodo valido!"
@@ -340,8 +360,14 @@ msgid ""
 msgstr "Si può fare riferimento alle altre righe usando il loro numero di sequenza (ad es. 'L(1)' per la prima riga). Esempi di codice: 'L(1) * 0.2'; 'L(2) - L(1)'; 'L(1) + L(2) + L(3)'; '1250'"
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:164
-#: code:addons/account_move_template/wizard/select_template.py:200
+#: code:addons/account_move_template/wizard/select_template.py:172
+#: code:addons/account_move_template/wizard/select_template.py:208
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
 msgstr "E' necessario definire un giornale analitico sul sezionale '%s'!"
+
+#. module: account_move_template
+#: view:wizard.select.move.template:account_move_template.wizard_select_template
+msgid "or"
+msgstr "oppure"
+
