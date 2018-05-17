@@ -20,7 +20,7 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import models, fields, api, _
 from openerp.exceptions import ValidationError
 
 
@@ -36,7 +36,7 @@ class AccountMoveTemplate(models.Model):
 
     company_id = fields.Many2one(
         comodel_name='res.company',
-        string='Company',
+        string=_('Company'),
         required=True,
         change_default=True,
         default=_company_get,
@@ -44,18 +44,31 @@ class AccountMoveTemplate(models.Model):
     template_line_ids = fields.One2many(
         comodel_name='account.move.template.line',
         inverse_name='template_id',
-        string='Template Lines'
+        string=_('Template Lines')
     )
 
-    cross_journals = fields.Boolean(string='Cross-Journals')
+    cross_journals = fields.Boolean(string=_('Cross-Journals'))
 
-    cross_partners = fields.Boolean(string='Cross-Partners')
+    cross_partners = fields.Boolean(string=_('Cross-Partners'))
 
     transitory_acc_id = fields.Many2one(
         comodel_name='account.account',
-        string='Transitory account',
+        string=_('Transitory account'),
         required=False
     )
+
+    @api.one
+    @api.constrains('cross_partners')
+    def _check_template_move_line_partners(self):
+        error_message = _(
+            'You cannot unset the cross-partners flag because '
+            'the move line %s has a partner. Please remove it first.'
+        )
+        
+        if not self.cross_partners:
+            for line in self.template_line_ids:
+                if line.partner_id:
+                    raise ValidationError(error_message % line.name)
 
 
 class AccountMoveTemplateLine(models.Model):
@@ -64,48 +77,51 @@ class AccountMoveTemplateLine(models.Model):
 
     journal_id = fields.Many2one(
         comodel_name='account.journal',
-        string='Journal',
+        string=_('Journal'),
         required=True
     )
     account_id = fields.Many2one(
         comodel_name='account.account',
-        string='Account',
+        string=_('Account'),
         required=True,
         ondelete="cascade"
     )
     move_line_type = fields.Selection(
         [('cr', 'Credit'), ('dr', 'Debit')],
-        string='Move Line Type',
+        string=_('Move Line Type'),
         required=True
     )
     analytic_account_id = fields.Many2one(
         comodel_name='account.analytic.account',
-        string='Analytic Account',
+        string=_('Analytic Account'),
         ondelete="cascade"
     )
     template_id = fields.Many2one(
         comodel_name='account.move.template',
-        string='Template'
+        string=_('Template')
     )
     account_tax_id = fields.Many2one(
         comodel_name='account.tax',
-        string='Tax'
+        string=_('Tax')
     )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Partner',
+        string=_('Partner'),
         required=False,
         ondelete="cascade"
     )
 
     cross_partner = fields.Boolean(
-        string='Cross-Partner',
+        string=_('Cross-Partner'),
         related='template_id.cross_partners'
     )
 
     _sql_constraints = [
-        ('sequence_template_uniq', 'unique (template_id,sequence)',
-         'The sequence of the line must be unique per template !')
+        (
+            'sequence_template_uniq',
+            'unique (template_id,sequence)',
+            _('The sequence of the line must be unique per template !')
+        )
     ]
 
     @api.constrains('journal_id')
@@ -114,7 +130,7 @@ class AccountMoveTemplateLine(models.Model):
         # of cross journals/single journal
         journal_ids = []
         all_journal_ids = []
-        error_message = (
+        error_message = _(
             u'If the template is "cross-journals", the Journals must be '
             u'different, if the template does not "cross-journals" the '
             u'Journals must be the same!'

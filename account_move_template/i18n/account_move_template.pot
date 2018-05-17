@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-14 14:40+0000\n"
-"PO-Revision-Date: 2018-05-14 14:40+0000\n"
+"POT-Creation-Date: 2018-05-17 15:53+0000\n"
+"PO-Revision-Date: 2018-05-17 15:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,9 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,account_id:0
+#: code:addons/account_move_template/account_move_template.py:85
 #: field:wizard.select.move.template.line,account_id:0
+#, python-format
 msgid "Account"
 msgstr ""
 
@@ -28,11 +30,13 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
+#: code:addons/account_move_template/account_move_template.py:96
+#, python-format
 msgid "Analytic Account"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:101
+#: code:addons/account_move_template/wizard/select_template.py:118
 #, python-format
 msgid "At least one amount has to be non-zero!"
 msgstr ""
@@ -50,6 +54,8 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,company_id:0
+#: code:addons/account_move_template/account_move_template.py:39
+#, python-format
 msgid "Company"
 msgstr ""
 
@@ -98,17 +104,28 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,cross_journals:0
+#: code:addons/account_move_template/account_move_template.py:50
+#, python-format
 msgid "Cross-Journals"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,cross_partner:0
+#: code:addons/account_move_template/account_move_template.py:115
+#, python-format
 msgid "Cross-Partner"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,cross_partners:0
+#: code:addons/account_move_template/account_move_template.py:52
+#, python-format
 msgid "Cross-Partners"
+msgstr ""
+
+#. module: account_move_template
+#: field:wizard.select.move.template,date:0
+msgid "Date"
 msgstr ""
 
 #. module: account_move_template
@@ -138,6 +155,12 @@ msgid "ID"
 msgstr ""
 
 #. module: account_move_template
+#: code:addons/account_move_template/account_move_template.py:133
+#, python-format
+msgid "If the template is \"cross-journals\", the Journals must be different, if the template does not \"cross-journals\" the Journals must be the same!"
+msgstr ""
+
+#. module: account_move_template
 #: code:addons/account_move_template/account_document_template.py:85
 #, python-format
 msgid "Inconsistency between input lines and filled lines for template %s"
@@ -145,6 +168,8 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
+#: code:addons/account_move_template/account_move_template.py:80
+#, python-format
 msgid "Journal"
 msgstr ""
 
@@ -209,13 +234,17 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
+#: code:addons/account_move_template/account_move_template.py:91
 #: field:wizard.select.move.template.line,move_line_type:0
+#, python-format
 msgid "Move Line Type"
 msgstr ""
 
 #. module: account_move_template
+#: code:addons/account_move_template/wizard/select_template.py:30
 #: view:wizard.select.move.template:account_move_template.wizard_select_template
 #: field:wizard.select.move.template,template_id:0
+#, python-format
 msgid "Move Template"
 msgstr ""
 
@@ -246,7 +275,7 @@ msgid "Next"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:207
+#: code:addons/account_move_template/wizard/select_template.py:233
 #, python-format
 msgid "No Analytic Journal !"
 msgstr ""
@@ -258,9 +287,19 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,partner_id:0
+#: code:addons/account_move_template/account_move_template.py:109
+#: code:addons/account_move_template/wizard/select_template.py:36
 #: field:wizard.select.move.template,partner_id:0
 #: field:wizard.select.move.template.line,partner_id:0
+#, python-format
 msgid "Partner"
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/select_template.py:52
+#: field:wizard.select.move.template,period_id:0
+#, python-format
+msgid "Period"
 msgstr ""
 
 #. module: account_move_template
@@ -282,24 +321,32 @@ msgid "Sequence"
 msgstr ""
 
 #. module: account_move_template
+#: code:addons/account_move_template/wizard/select_template.py:59
 #: field:wizard.select.move.template,state:0
+#, python-format
 msgid "State"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
+#: code:addons/account_move_template/account_move_template.py:105
+#, python-format
 msgid "Tax"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,template_id:0
+#: code:addons/account_move_template/account_move_template.py:101
 #: field:wizard.select.move.template.line,template_id:0
+#, python-format
 msgid "Template"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,template_line_ids:0
+#: code:addons/account_move_template/account_move_template.py:47
 #: model:ir.model,name:account_move_template.model_wizard_select_move_template_line
+#, python-format
 msgid "Template Lines"
 msgstr ""
 
@@ -310,11 +357,15 @@ msgstr ""
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
+#: code:addons/account_move_template/account_move_template.py:123
+#, python-format
 msgid "The sequence of the line must be unique per template !"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template,transitory_acc_id:0
+#: code:addons/account_move_template/account_move_template.py:56
+#, python-format
 msgid "Transitory account"
 msgstr ""
 
@@ -322,12 +373,6 @@ msgstr ""
 #: field:account.document.template.line,type:0
 #: field:account.move.template.line,type:0
 msgid "Type"
-msgstr ""
-
-#. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:109
-#, python-format
-msgid "Unable to find a valid period !"
 msgstr ""
 
 #. module: account_move_template
@@ -342,8 +387,14 @@ msgid "You can refer to other lines using their sequence number (e.g. 'L(1)' for
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:172
-#: code:addons/account_move_template/wizard/select_template.py:208
+#: code:addons/account_move_template/account_move_template.py:63
+#, python-format
+msgid "You cannot unset the cross-partners flag because the move line %s has a partner. Please remove it first."
+msgstr ""
+
+#. module: account_move_template
+#: code:addons/account_move_template/wizard/select_template.py:198
+#: code:addons/account_move_template/wizard/select_template.py:234
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
 msgstr ""

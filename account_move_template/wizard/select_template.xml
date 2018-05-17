@@ -7,13 +7,20 @@
             <field name="model">wizard.select.move.template</field>
             <field name="arch" type="xml">
                 <form string="Move Template" >
-                    <group col="2" width="600" height="500">
+                    <field name="state" invisible="1"/>
+
+                    <group attrs="{'invisible':[('state','=','template_selected')]}">
                         <group>
-                            <field name="template_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
-                            <field name="partner_id" colspan="2" attrs="{'invisible':[('state','=','template_selected')]}"/>
-                            <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
-                            <field name="state" invisible="1"/>
+                            <field name="template_id" />
+                            <field name="partner_id" />
                         </group>
+                        <group>
+                            <field name="date" />
+                            <field name="period_id" />
+                        </group>
+                    </group>
+                    <group col="2" width="600" height="500">
+                        <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
                     </group>
                     <footer>
                         <button name="load_lines" string="Next" type="object" class="oe_highlight" attrs="{'invisible':[('state','=','template_selected')]}" />

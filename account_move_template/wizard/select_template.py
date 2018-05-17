@@ -20,32 +20,49 @@
 ##############################################################################
 
 from openerp import models, fields, api, exceptions, _
-import time
 
-import logging
-_log =logging.getLogger(__name__)
 
 class WizardSelectMoveTemplate(models.TransientModel):
     _name = "wizard.select.move.template"
 
     template_id = fields.Many2one(
         comodel_name='account.move.template',
-        string='Move Template',
+        string=_('Move Template'),
         required=True
     )
+
     partner_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Partner'
+        string=_('Partner')
     )
+
     line_ids = fields.One2many(
         comodel_name='wizard.select.move.template.line',
         inverse_name='template_id',
         string='Lines'
     )
-    state = fields.Selection(
-        [('template_selected', 'Template selected')],
-        string='State'
+
+    date = fields.Date(
+        default=fields.Date.today(),
+        required=True
     )
+
+    period_id = fields.Many2one(
+        comodel_name='account.period',
+        string=_('Period'),
+        required=True,
+        default=lambda self: self.period_id.find(self.date)
+    )
+
+    state = fields.Selection(
+        selection=[('template_selected', 'Template selected')],
+        string=_('State')
+    )
+
+    @api.one
+    @api.onchange('date')
+    def onchange_date(self):
+        self.period_id = self.period_id.find(self.date)
 
     @api.multi
     def check_zero_lines(self):
@@ -95,7 +112,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
     @api.multi
     def load_template(self):
         self.ensure_one()
-        account_period_model = self.env['account.period']
+        # account_period_model = self.env['account.period']
         if not self.check_zero_lines():
             raise exceptions.Warning(
                 _('At least one amount has to be non-zero!')
@@ -104,9 +121,9 @@ class WizardSelectMoveTemplate(models.TransientModel):
         for template_line in self.line_ids:
             input_lines[template_line.sequence] = template_line.amount
 
-        period = account_period_model.find()
-        if not period:
-            raise exceptions.Warning(_('Unable to find a valid period !'))
+        # period = account_period_model.find()
+        # if not period:
+        #     raise exceptions.Warning(_('Unable to find a valid period !'))
 
         computed_lines = self.template_id.compute_lines(input_lines)
 
@@ -117,17 +134,25 @@ class WizardSelectMoveTemplate(models.TransientModel):
             if line.journal_id.id not in moves:
                 moves[line.journal_id.id] = self._make_move(
                     self.template_id.name,
-                    period.id,
+                    self.date,
+                    self.period_id.id,
                     line.journal_id.id,
                     wizard_partner_id
                 )
 
-            partner_id = (line.partner_id and line.partner_id.id) or wizard_partner_id
+            if self.template_id.cross_partners:
+                partner_id = (line.partner_id and line.partner_id.id) or False
+            elif wizard_partner_id:
+                partner_id = wizard_partner_id
+            else:
+                partner_id = False
+
             self._make_move_line(
                 line,
                 computed_lines,
                 moves[line.journal_id.id],
-                period.id,
+                self.date,
+                self.period_id.id,
                 partner_id
             )
             if self.template_id.cross_journals:
@@ -136,7 +161,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
                     line,
                     computed_lines,
                     moves[line.journal_id.id],
-                    period.id,
+                    self.period_id.id,
                     trans_account_id,
                     wizard_partner_id
                 )
@@ -152,9 +177,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
         }
 
     @api.model
-    def _make_move(self, ref, period_id, journal_id, partner_id):
+    def _make_move(self, ref, date, period_id, journal_id, partner_id):
         move = self.env['account.move'].create({
             'ref': ref,
+            'date': date,
             'period_id': period_id,
             'journal_id': journal_id,
             'partner_id': partner_id,
@@ -163,7 +189,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
     @api.model
     def _make_move_line(self, line, computed_lines,
-                        move_id, period_id, partner_id):
+                        move_id, date, period_id, partner_id):
         account_move_line_model = self.env['account.move.line']
         analytic_account_id = False
         if line.analytic_account_id:
@@ -179,10 +205,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'name': line.name,
             'move_id': move_id,
             'journal_id': line.journal_id.id,
+            'date': date,
             'period_id': period_id,
             'analytic_account_id': analytic_account_id,
             'account_id': line.account_id.id,
-            'date': time.strftime('%Y-%m-%d'),
             'account_tax_id': line.account_tax_id.id,
             'credit': 0.0,
             'debit': 0.0,
@@ -197,7 +223,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
 
     @api.model
     def _make_transitory_move_line(self, line,
-                                   computed_lines, move_id, period_id,
+                                   computed_lines, move_id, date, period_id,
                                    trans_account_id, partner_id):
         account_move_line_model = self.env['account.move.line']
         analytic_account_id = False
@@ -214,10 +240,10 @@ class WizardSelectMoveTemplate(models.TransientModel):
             'name': 'transitory',
             'move_id': move_id,
             'journal_id': line.journal_id.id,
+            'date': date,
             'period_id': period_id,
             'analytic_account_id': analytic_account_id,
             'account_id': trans_account_id,
-            'date': time.strftime('%Y-%m-%d'),
             'partner_id': partner_id,
         }
         if line.move_line_type != 'cr':
