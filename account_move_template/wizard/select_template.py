@@ -112,7 +112,6 @@ class WizardSelectMoveTemplate(models.TransientModel):
     @api.multi
     def load_template(self):
         self.ensure_one()
-        # account_period_model = self.env['account.period']
         if not self.check_zero_lines():
             raise exceptions.Warning(
                 _('At least one amount has to be non-zero!')
@@ -121,12 +120,7 @@ class WizardSelectMoveTemplate(models.TransientModel):
         for template_line in self.line_ids:
             input_lines[template_line.sequence] = template_line.amount
 
-        # period = account_period_model.find()
-        # if not period:
-        #     raise exceptions.Warning(_('Unable to find a valid period !'))
-
         computed_lines = self.template_id.compute_lines(input_lines)
-
         wizard_partner_id = (self.partner_id and self.partner_id.id) or False
 
         moves = {}

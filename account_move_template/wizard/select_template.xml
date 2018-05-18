@@ -20,7 +20,16 @@
                         </group>
                     </group>
                     <group col="2" width="600" height="500">
-                        <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}"/>
+                        <field name="line_ids" colspan="2" nolabel="1" attrs="{'invisible':[('state','!=','template_selected')]}">
+                            <tree editable="bottom" delete="false" create="false">
+                                <field name="sequence" invisible="1" />
+                                <field name="name" />
+                                <field name="partner_id" />
+                                <field name="account_id" />
+                                <field name="move_line_type" />
+                                <field name="amount" />
+                            </tree>
+                        </field>
                     </group>
                     <footer>
                         <button name="load_lines" string="Next" type="object" class="oe_highlight" attrs="{'invisible':[('state','=','template_selected')]}" />
