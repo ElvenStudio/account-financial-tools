@@ -38,15 +38,24 @@ class AccountInvoice(models.Model):
         :param invoice_list: the list of other invoice to check with the start invoice move_id number
         :return: a list of tuple [(account.invoice, account.move)] with all the invoice detached and the related account.move
         """
-        new_number = invoice.move_id.name
+        new_number = start_invoice.move_id.name
 
         # check if another invoice has the same number
-        external_invoice = self.search([('number', '=', new_number), ('id', 'not in', invoice_list.ids)])
+        external_invoice = self.search(
+            [
+                ('number', '=', new_number),
+                ('id', 'not in', invoice_list.ids)
+            ]
+        )
+
         if external_invoice:
-            raise ValidationError(_('Cannot renumber invoice %s, because the new number is the same of the invoice %s. Extend periods to renumber correctly all invoices.' % invoice.number, external_invoice.number))
+            raise ValidationError(_(
+                'Cannot renumber invoice %s, '
+                'because the new number is the same of the invoice %s. '
+                'Extend periods to renumber correctly all invoices.' % start_invoice.number, external_invoice.number))
 
         detached_move_number = start_invoice.move_id.name
-        detached_invoice = [(start_invoice, invoice.move_id)]
+        detached_invoice = [(start_invoice, start_invoice.move_id)]
         start_invoice.write({'move_id': False})
 
         linked_invoice = invoice_list.filtered(lambda i: i.number == detached_move_number)
@@ -63,17 +72,27 @@ class AccountInvoice(models.Model):
         updated_invoice_ids = []
         for invoice in self:
             if invoice.id not in updated_invoice_ids and invoice.move_id and invoice.number != invoice.move_id.name:
-                # in order to update the invoice number, the only way is to detach the move_id from the invoice
-                # and reattach it. The invoice number then can be replaced with the new one.
-                # Trying to set the invoice number as empty or False will raise an SQL Constraint error!
+                # In order to update the invoice number,
+                # the only way is to detach the move_id from the invoice
+                # and reattach it.
+                #
+                # The invoice number then can be replaced with the new one.
+                # Trying to set the invoice number as empty or False
+                # will raise an SQL Constraint error!
                 detached_invoices = self.env['account.invoice']._detach_move_from_invoices(invoice, self)
 
                 for detached_invoice, move in detached_invoices:
-                    # update ref move field, because it can differ from the new one assigned
+                    # update ref move field,
+                    # because it can differ from the new one assigned
                     move.write({'ref': move.name})
 
-                    # reattach move_id to the invoice, and update the number fields
-                    detached_invoice.write({'number': move.name, 'internal_number': move.name, 'move_id': move.id})
+                    # reattach move_id to the invoice,
+                    # and update the number fields
+                    detached_invoice.write({
+                        'number': move.name,
+                        'internal_number': move.name,
+                        'move_id': move.id}
+                    )
 
                     # avoid to recheck the invoice in the main loop
                     updated_invoice_ids.append(detached_invoice.id)

@@ -31,28 +31,48 @@ class wizard_renumber(orm.TransientModel):
     _name = "wizard.renumber"
     _description = "Account renumber wizard"
     _columns = {
-        'journal_ids': fields.many2many('account.journal',
-                                        'account_journal_wzd_renumber_rel',
-                                        'wizard_id', 'journal_id',
-                                        required=True,
-                                        help="Journals to renumber",
-                                        string="Journals"),
+        'journal_ids': fields.many2many(
+            'account.journal',
+            'account_journal_wzd_renumber_rel',
+            'wizard_id', 'journal_id',
+            required=True,
+            help="Journals to renumber",
+            string="Journals"
+        ),
 
-        'period_ids': fields.many2many('account.period',
-                                       'account_period_wzd_renumber_rel',
-                                       'wizard_id', 'period_id',
-                                       required=True,
-                                       help='Fiscal periods to renumber',
-                                       string="Periods", ondelete='null'),
+        'period_ids': fields.many2many(
+            'account.period',
+            'account_period_wzd_renumber_rel',
+            'wizard_id', 'period_id',
+            required=True,
+            help='Fiscal periods to renumber',
+            string="Periods",
+            ondelete='null'
+        ),
 
-        'number_next': fields.integer(_('First Number'), required=True,
-                                      help=_("Journal sequences will start counting on this number")),
+        'number_next': fields.integer(
+            _('First Number'),
+            required=True,
+            help=_("Journal sequences will start counting on this number")
+        ),
 
-        'update_related_invoice_number': fields.boolean(_('Update related invoice'),
-                                                        help=_('Update the invoice number when moves refer to an invoice journal.')),
+        'update_related_invoice_number': fields.boolean(
+            _('Update related invoice'),
+            help=_('Update the invoice number when moves refer to an invoice journal.')
+        ),
 
-        'state': fields.selection([('init', 'Initial'),
-                                   ('renumber', 'Renumbering')], readonly=True)
+        'update_related_voucher_number': fields.boolean(
+            _('Update related voucher'),
+            help=_('Update the voucher number when moves refer to a voucher.')
+        ),
+
+        'state': fields.selection(
+            [
+                ('init', 'Initial'),
+                ('renumber', 'Renumbering')
+            ],
+            readonly=True
+        )
     }
 
     _defaults = {
@@ -75,6 +95,7 @@ class wizard_renumber(orm.TransientModel):
         journal_ids = [x.id for x in form.journal_ids]
         number_next = form.number_next or 1
         update_related_invoice_number = form.update_related_invoice_number or False
+        update_related_voucher_number = form.update_related_voucher_number or False
 
         if not (period_ids and journal_ids):
             raise orm.except_orm(_('No Data Available'), _('No records found for your selection!'))
@@ -89,7 +110,7 @@ class wizard_renumber(orm.TransientModel):
 
         _logger.debug("Renumbering %d account moves.", len(move_ids))
         moves = move_obj.browse(cr, uid, move_ids, context=context)
-        moves.action_renumber(number_next, update_related_invoice_number)
+        moves.action_renumber(number_next, update_related_invoice_number, update_related_voucher_number)
         _logger.debug("%d account moves renumbered.", len(move_ids))
 
         form.write({'state': 'renumber'})

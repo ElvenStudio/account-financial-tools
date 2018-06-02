@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_renumber
+#	* account_renumber
 #
 # Translators:
 # Antonio Trueba, 2016
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-financial-tools (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-02 10:42+0000\n"
-"PO-Revision-Date: 2018-03-02 10:42+0000\n"
+"POT-Creation-Date: 2018-05-30 14:08+0000\n"
+"PO-Revision-Date: 2018-05-30 14:08+0000\n"
 "Last-Translator: Elven Studio <elvenstudio.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #. module: account_renumber
-#: code:addons/account_renumber/models/account_invoice.py:46
+#: code:addons/account_renumber/models/account_invoice.py:52
 #, python-format
 msgid "Cannot renumber invoice %s, because the new number is the same of the invoice %s. Extend periods to renumber correctly all invoices."
 msgstr "Non puoi rinumerare la fattura %s, perchè il nuovo numero è lo stesso della fattura %s. Estendi i periodi per rinumeare correttamente tutte le fatture."
@@ -64,7 +64,7 @@ msgid "Display Name"
 msgstr "Nome da visualizzare"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:48
+#: code:addons/account_renumber/wizard/wizard_renumber.py:54
 #: field:wizard.renumber,number_next:0
 #, python-format
 msgid "First Number"
@@ -96,7 +96,7 @@ msgid "Invoice"
 msgstr "Fattura"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:49
+#: code:addons/account_renumber/wizard/wizard_renumber.py:56
 #: help:wizard.renumber,number_next:0
 #, python-format
 msgid "Journal sequences will start counting on this number"
@@ -134,20 +134,20 @@ msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:80
-#: code:addons/account_renumber/wizard/wizard_renumber.py:88
+#: code:addons/account_renumber/wizard/wizard_renumber.py:101
+#: code:addons/account_renumber/wizard/wizard_renumber.py:109
 #, python-format
 msgid "No Data Available"
 msgstr ""
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:88
+#: code:addons/account_renumber/wizard/wizard_renumber.py:109
 #, python-format
 msgid "No account moves found for your selection!"
 msgstr "No account moves found for your selection!"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:80
+#: code:addons/account_renumber/wizard/wizard_renumber.py:101
 #, python-format
 msgid "No records found for your selection!"
 msgstr "Nessun record trovato nella tua selezione!"
@@ -180,7 +180,7 @@ msgid "Renumber journal entries"
 msgstr "Registrazioni sezionale rinumerate"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:101
+#: code:addons/account_renumber/wizard/wizard_renumber.py:122
 #, python-format
 msgid "Renumbered account moves"
 msgstr "Renumbered account moves"
@@ -196,18 +196,32 @@ msgid "This wizard will help you renumber entries in one or more journals."
 msgstr "Questo wizard ti aiuta a rinumerare registrazioni contabili di uno o più sezionali."
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:51
+#: code:addons/account_renumber/wizard/wizard_renumber.py:60
 #: field:wizard.renumber,update_related_invoice_number:0
 #, python-format
 msgid "Update related invoice"
 msgstr "Aggiorna le fatture correlate"
 
 #. module: account_renumber
-#: code:addons/account_renumber/wizard/wizard_renumber.py:52
+#: code:addons/account_renumber/wizard/wizard_renumber.py:65
+#: field:wizard.renumber,update_related_voucher_number:0
+#, python-format
+msgid "Update related voucher"
+msgstr "Aggiorna i voucher correlati"
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:61
 #: help:wizard.renumber,update_related_invoice_number:0
 #, python-format
 msgid "Update the invoice number when moves refer to an invoice journal."
 msgstr "Aggiorna il numero fattura quando una registrazione fa riferimento a un sezionale di fatturazione."
+
+#. module: account_renumber
+#: code:addons/account_renumber/wizard/wizard_renumber.py:66
+#: help:wizard.renumber,update_related_voucher_number:0
+#, python-format
+msgid "Update the voucher number when moves refer to a voucher."
+msgstr "Aggiorna il numero del voucher quando la registrazione si riferisce ad un voucher."
 
 #. module: account_renumber
 #: view:wizard.renumber:account_renumber.view_account_renumber_form

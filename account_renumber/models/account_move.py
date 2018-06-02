@@ -25,7 +25,7 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     @api.multi
-    def action_renumber(self, number_next=1, update_related_invoice_number=False):
+    def action_renumber(self, number_next=1, update_related_invoice_number=False, update_related_voucher_number=False):
 
         sequence_ids_seen = []
         for move in self:
@@ -44,5 +44,15 @@ class AccountMove(models.Model):
             self.invalidate_cache()
 
         if update_related_invoice_number:
-            invoices = self.env['account.invoice'].search([('move_id', 'in', self.ids)])
+            invoice_cls = self.env['account.invoice']
+            invoices = invoice_cls.search([('move_id', 'in', self.ids)])
             invoices.renumber_invoices_from_move_id()
+
+        if update_related_voucher_number:
+            self._cr.execute(
+                'UPDATE account_voucher AS av '
+                'SET number=acm.name '
+                'FROM account_move AS acm '
+                'WHERE acm.id=av.move_id '
+                'AND acm.id in %s', (tuple(self.ids),)
+            )

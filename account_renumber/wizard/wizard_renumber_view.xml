@@ -13,6 +13,7 @@
                     <group string="General Data">
                         <field name="number_next"/>
                         <field name="update_related_invoice_number"/>
+                        <field name="update_related_voucher_number"/>
                     </group>
                     <group string="Journals and periods to consider">
                         <notebook colspan="4">
