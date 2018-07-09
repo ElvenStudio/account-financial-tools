@@ -52,7 +52,7 @@ class AccountInvoice(models.Model):
             raise ValidationError(_(
                 'Cannot renumber invoice %s, '
                 'because the new number is the same of the invoice %s. '
-                'Extend periods to renumber correctly all invoices.' % start_invoice.number, external_invoice.number))
+                'Extend periods to renumber correctly all invoices.' % start_invoice.number or start_invoice.internal_number, external_invoice.number or external_invoice.internal_number))
 
         detached_move_number = start_invoice.move_id.name
         detached_invoice = [(start_invoice, start_invoice.move_id)]
