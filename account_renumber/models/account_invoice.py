@@ -60,7 +60,7 @@ class AccountInvoice(models.Model):
 
         linked_invoice = invoice_list.filtered(lambda i: i.number == detached_move_number)
         if linked_invoice:
-            detached_invoice += self._detach_move(linked_invoice, invoice_list)
+            detached_invoice += self._detach_move_from_invoices(linked_invoice, invoice_list)
 
         return detached_invoice
 
