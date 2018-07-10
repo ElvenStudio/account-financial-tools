@@ -21,9 +21,6 @@
 from openerp import models, api, _
 from  openerp.exceptions import ValidationError
 
-# import logging
-# _log = logging.getLogger(__name__)
-
 
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
