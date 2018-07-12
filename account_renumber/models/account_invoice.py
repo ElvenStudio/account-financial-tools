@@ -53,7 +53,7 @@ class AccountInvoice(models.Model):
                     'Cannot renumber invoice %s, '
                     'because the new number is the same of the invoice %s. '
                     'Extend periods to renumber correctly all invoices.'
-                ) % start_invoice_ref, external_invoice_ref
+                ) % (start_invoice_ref, external_invoice_ref)
             )
 
         detached_move_number = start_invoice.move_id.name
