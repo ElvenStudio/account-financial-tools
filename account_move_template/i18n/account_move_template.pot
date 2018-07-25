@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-17 15:53+0000\n"
-"PO-Revision-Date: 2018-05-17 15:53+0000\n"
+"POT-Creation-Date: 2013-10-18 17:49+0000\n
+"PO-Revision-Date: 2018-07-25 10:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,10 +17,15 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,account_id:0
-#: code:addons/account_move_template/account_move_template.py:85
+#: code:addons/account_move_template/account_move_template.py:87
 #: field:wizard.select.move.template.line,account_id:0
 #, python-format
 msgid "Account"
+msgstr ""
+
+#. module: account_move_template
+#: view:account.move.template:account_move_template.view_move_template_form
+msgid "Add an internal note here..."
 msgstr ""
 
 #. module: account_move_template
@@ -30,13 +35,13 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,analytic_account_id:0
-#: code:addons/account_move_template/account_move_template.py:96
+#: code:addons/account_move_template/account_move_template.py:98
 #, python-format
 msgid "Analytic Account"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:118
+#: code:addons/account_move_template/wizard/select_template.py:117
 #, python-format
 msgid "At least one amount has to be non-zero!"
 msgstr ""
@@ -111,7 +116,7 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,cross_partner:0
-#: code:addons/account_move_template/account_move_template.py:115
+#: code:addons/account_move_template/account_move_template.py:117
 #, python-format
 msgid "Cross-Partner"
 msgstr ""
@@ -155,7 +160,7 @@ msgid "ID"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_move_template.py:133
+#: code:addons/account_move_template/account_move_template.py:135
 #, python-format
 msgid "If the template is \"cross-journals\", the Journals must be different, if the template does not \"cross-journals\" the Journals must be the same!"
 msgstr ""
@@ -168,7 +173,7 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,journal_id:0
-#: code:addons/account_move_template/account_move_template.py:80
+#: code:addons/account_move_template/account_move_template.py:82
 #, python-format
 msgid "Journal"
 msgstr ""
@@ -234,7 +239,7 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,move_line_type:0
-#: code:addons/account_move_template/account_move_template.py:91
+#: code:addons/account_move_template/account_move_template.py:93
 #: field:wizard.select.move.template.line,move_line_type:0
 #, python-format
 msgid "Move Line Type"
@@ -275,9 +280,19 @@ msgid "Next"
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:233
+#: code:addons/account_move_template/wizard/select_template.py:227
 #, python-format
 msgid "No Analytic Journal !"
+msgstr ""
+
+#. module: account_move_template
+#: field:account.move.template,note:0
+msgid "Note"
+msgstr ""
+
+#. module: account_move_template
+#: view:account.move.template:account_move_template.view_move_template_form
+msgid "Notes"
 msgstr ""
 
 #. module: account_move_template
@@ -287,7 +302,7 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,partner_id:0
-#: code:addons/account_move_template/account_move_template.py:109
+#: code:addons/account_move_template/account_move_template.py:111
 #: code:addons/account_move_template/wizard/select_template.py:36
 #: field:wizard.select.move.template,partner_id:0
 #: field:wizard.select.move.template.line,partner_id:0
@@ -329,14 +344,14 @@ msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,account_tax_id:0
-#: code:addons/account_move_template/account_move_template.py:105
+#: code:addons/account_move_template/account_move_template.py:107
 #, python-format
 msgid "Tax"
 msgstr ""
 
 #. module: account_move_template
 #: field:account.move.template.line,template_id:0
-#: code:addons/account_move_template/account_move_template.py:101
+#: code:addons/account_move_template/account_move_template.py:103
 #: field:wizard.select.move.template.line,template_id:0
 #, python-format
 msgid "Template"
@@ -357,7 +372,7 @@ msgstr ""
 
 #. module: account_move_template
 #: sql_constraint:account.move.template.line:0
-#: code:addons/account_move_template/account_move_template.py:123
+#: code:addons/account_move_template/account_move_template.py:125
 #, python-format
 msgid "The sequence of the line must be unique per template !"
 msgstr ""
@@ -387,14 +402,14 @@ msgid "You can refer to other lines using their sequence number (e.g. 'L(1)' for
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/account_move_template.py:63
+#: code:addons/account_move_template/account_move_template.py:65
 #, python-format
 msgid "You cannot unset the cross-partners flag because the move line %s has a partner. Please remove it first."
 msgstr ""
 
 #. module: account_move_template
-#: code:addons/account_move_template/wizard/select_template.py:198
-#: code:addons/account_move_template/wizard/select_template.py:234
+#: code:addons/account_move_template/wizard/select_template.py:192
+#: code:addons/account_move_template/wizard/select_template.py:228
 #, python-format
 msgid "You have to define an analytic journal on the '%s' journal!"
 msgstr ""

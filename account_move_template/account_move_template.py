@@ -57,6 +57,8 @@ class AccountMoveTemplate(models.Model):
         required=False
     )
 
+    note = fields.Text()
+
     @api.one
     @api.constrains('cross_partners')
     def _check_template_move_line_partners(self):
